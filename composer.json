@@ -1,0 +1,14 @@
+{
+    "name": "sprinklr/scuptel-api",
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "require": {
+        "silex/silex": "~2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable"
+    }
+}
