@@ -2,20 +2,16 @@
 
 namespace Sprinklr\ScupTel\Tests\Domain\Entity;
 
-use Sprinklr\ScupTel\Domain\Entity\Plan;
+use Sprinklr\ScupTel\Domain\DataFixture\PlanData;
 
 class PlanTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreatePlanShouldReturnWithNameAndTimeInMinutesAndAdditionalMinuteRate()
     {
-        $name = 'Fale Mais 30';
-        $timeInMinutes = 30;
-        $additionalMinuteRate = 0.1;
+        $plan = PlanData::createPlanFaleMais30();
 
-        $plan = new Plan($name, $timeInMinutes, $additionalMinuteRate);
-
-        $this->assertEquals($name, $plan->getName());
-        $this->assertEquals($timeInMinutes, $plan->getTimeInMinutes());
-        $this->assertEquals($additionalMinuteRate, $plan->getAdditionalMinuteRate());
+        $this->assertEquals('Fale Mais 30', $plan->getName());
+        $this->assertEquals(30, $plan->getTimeInMinutes());
+        $this->assertEquals(0.1, $plan->getAdditionalMinuteRate());
     }
 }
