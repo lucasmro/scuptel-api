@@ -2,21 +2,20 @@
 
 namespace Sprinklr\ScupTel\Tests\Domain\Entity;
 
-use Sprinklr\ScupTel\Domain\Entity\Price;
-use Sprinklr\ScupTel\Domain\Entity\AreaCode;
+use Sprinklr\ScupTel\Domain\DataFixture\AreaCodeData;
+use Sprinklr\ScupTel\Domain\DataFixture\PriceData;
 
 class PriceTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreatePriceShouldReturnWithValuePerMinuteAndOriginAreaCodeAndDestinyAreaCode()
     {
-        $fromAreaCode = new AreaCode(11, 'São Paulo');
-        $toAreaCode = new AreaCode(16, 'Ribeirão Preto');
-        $valuePerMinute = 1.9;
+        $fromAreaCode = AreaCodeData::createAreaCode11AndNameSaoPaulo();
+        $toAreaCode = AreaCodeData::createAreaCode16AndNameRibeiraoPreto();
 
-        $price = new Price($fromAreaCode, $toAreaCode, $valuePerMinute);
+        $price = PriceData::createPriceFromAreaCode11AndNameSaoPauloToAreaCode16AndNameRibeiraoPreto();
 
         $this->assertEquals($fromAreaCode, $price->getFromAreaCode());
         $this->assertEquals($toAreaCode, $price->getToAreaCode());
-        $this->assertEquals($valuePerMinute, $price->getValuePerMinute());
+        $this->assertEquals(1.9, $price->getValuePerMinute());
     }
 }
