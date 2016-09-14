@@ -2,18 +2,15 @@
 
 namespace Sprinklr\ScupTel\Tests\Domain\Entity;
 
-use Sprinklr\ScupTel\Domain\Entity\AreaCode;
+use Sprinklr\ScupTel\Domain\DataFixture\AreaCodeData;
 
 class AreaCodeTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateAreaCodeShouldReturnWithCodeAndName()
     {
-        $code = 11;
-        $name = 'São Paulo';
+        $areaCode = AreaCodeData::createAreaCode11AndNameSaoPaulo();
 
-        $areaCode = new AreaCode($code, $name);
-
-        $this->assertEquals($code, $areaCode->getCode());
-        $this->assertEquals($name, $areaCode->getName());
+        $this->assertEquals(11, $areaCode->getCode());
+        $this->assertEquals('São Paulo', $areaCode->getName());
     }
 }
