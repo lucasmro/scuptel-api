@@ -16,6 +16,10 @@ $app['serializer.cache.dir'] =__DIR__.'/../app/cache/serializer';
 $app['serializer.debug'] = false;
 
 // Services
+$app['plan.controller'] = function($app) {
+    return new \Sprinklr\ScupTel\Application\Controller\PlanController($app['serializer']);
+};
+
 $app['serializer'] = function ($app) {
     $serializerBuilder = JMS\Serializer\SerializerBuilder::create();
     $serializerBuilder->setCacheDir($app['serializer.cache.dir']);
@@ -34,6 +38,8 @@ $app->register(new \Silex\Provider\ServiceControllerServiceProvider());
 $app->get('/', function(Request $request) use ($app) {
     return "ScupTel";
 });
+
+$app->get('/plans', 'plan.controller:index');
 
 // Error Handler
 ErrorHandler::register();
