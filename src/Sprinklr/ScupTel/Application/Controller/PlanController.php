@@ -3,22 +3,27 @@
 namespace Sprinklr\ScupTel\Application\Controller;
 
 use JMS\Serializer\SerializerInterface;
-use Sprinklr\ScupTel\Domain\DataFixture\PlanData;
+use Sprinklr\ScupTel\Domain\Repository\PlanRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class PlanController extends ApiController
 {
-    public function __construct(SerializerInterface $serializer)
-    {
+    private $repository;
+
+    public function __construct(
+        SerializerInterface $serializer,
+        PlanRepositoryInterface $repository
+    ) {
         parent::__construct($serializer);
+
+        $this->repository = $repository;
     }
 
     public function index(Request $request)
     {
-        // TODO: Refactor
-        $plan = PlanData::createPlanFaleMais60();
+        $plans = $this->repository->findAll();
 
-        return $this->buildResponse($request, $plan, Response::HTTP_OK);
+        return $this->buildResponse($request, $plans, Response::HTTP_OK);
     }
 }

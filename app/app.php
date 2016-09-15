@@ -16,8 +16,15 @@ $app['serializer.cache.dir'] =__DIR__.'/../app/cache/serializer';
 $app['serializer.debug'] = false;
 
 // Services
+$app['plan.repository'] = function($app) {
+    return new \Sprinklr\ScupTel\Infrastructure\Repository\PlanRepository();
+};
+
 $app['plan.controller'] = function($app) {
-    return new \Sprinklr\ScupTel\Application\Controller\PlanController($app['serializer']);
+    return new \Sprinklr\ScupTel\Application\Controller\PlanController(
+        $app['serializer'],
+        $app['plan.repository']
+    );
 };
 
 $app['serializer'] = function ($app) {
