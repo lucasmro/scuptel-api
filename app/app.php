@@ -24,6 +24,10 @@ $app['plan.repository'] = function($app) {
     return new \Sprinklr\ScupTel\Infrastructure\Repository\PlanRepository();
 };
 
+$app['price.repository'] = function($app) {
+    return new \Sprinklr\ScupTel\Infrastructure\Repository\PriceRepository();
+};
+
 $app['area.code.controller'] = function($app) {
     return new \Sprinklr\ScupTel\Application\Controller\AreaCodeController(
         $app['serializer'],
