@@ -3,6 +3,7 @@
 namespace Sprinklr\ScupTel\Application\Controller;
 
 use JMS\Serializer\SerializerInterface;
+use Sprinklr\ScupTel\Domain\Dto\CollectionDto;
 use Sprinklr\ScupTel\Domain\Repository\PlanRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,8 @@ class PlanController extends ApiController
     {
         $plans = $this->repository->findAll();
 
-        return $this->buildResponse($request, $plans, Response::HTTP_OK);
+        $collection = new CollectionDto($plans);
+
+        return $this->buildResponse($request, $collection, Response::HTTP_OK);
     }
 }
