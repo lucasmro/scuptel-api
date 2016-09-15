@@ -86,6 +86,8 @@ $app['logger.handler'] = function ($app) {
 // Providers
 $app->register(new \Silex\Provider\ServiceControllerServiceProvider());
 
+$app->register(new Cocur\Slugify\Bridge\Silex2\SlugifyServiceProvider());
+
 $app->register(new Knp\Provider\ConsoleServiceProvider(), array(
         'console.name' => 'ScupTel',
         'console.version' => 'master',
