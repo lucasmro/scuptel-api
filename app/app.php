@@ -63,6 +63,13 @@ $app['serializer'] = function ($app) {
 // Providers
 $app->register(new \Silex\Provider\ServiceControllerServiceProvider());
 
+$app->register(new Knp\Provider\ConsoleServiceProvider(), array(
+        'console.name' => 'ScupTel',
+        'console.version' => 'master',
+        'console.project_directory' => __DIR__ . "/.."
+    )
+);
+
 // Routes
 $app->get('/', function(Request $request) use ($app) {
     return "ScupTel";
