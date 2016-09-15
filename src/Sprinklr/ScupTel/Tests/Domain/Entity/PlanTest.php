@@ -10,6 +10,7 @@ class PlanTest extends \PHPUnit_Framework_TestCase
     {
         $plan = PlanData::createPlanFaleMais30();
 
+        $this->assertEquals('falemais-30', $plan->getSlug());
         $this->assertEquals('FaleMais 30', $plan->getName());
         $this->assertEquals(30, $plan->getTimeInMinutes());
         $this->assertEquals(0.1, $plan->getAdditionalMinuteRate());
@@ -19,6 +20,7 @@ class PlanTest extends \PHPUnit_Framework_TestCase
     {
         $plan = PlanData::createPlanFaleMais60();
 
+        $this->assertEquals('falemais-60', $plan->getSlug());
         $this->assertEquals('FaleMais 60', $plan->getName());
         $this->assertEquals(60, $plan->getTimeInMinutes());
         $this->assertEquals(0.1, $plan->getAdditionalMinuteRate());
@@ -28,6 +30,7 @@ class PlanTest extends \PHPUnit_Framework_TestCase
     {
         $plan = PlanData::createPlanFaleMais120();
 
+        $this->assertEquals('falemais-120', $plan->getSlug());
         $this->assertEquals('FaleMais 120', $plan->getName());
         $this->assertEquals(120, $plan->getTimeInMinutes());
         $this->assertEquals(0.1, $plan->getAdditionalMinuteRate());

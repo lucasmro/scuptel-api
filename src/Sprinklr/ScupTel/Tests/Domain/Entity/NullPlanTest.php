@@ -10,6 +10,7 @@ class NullPlanTest extends \PHPUnit_Framework_TestCase
     {
         $plan = new NullPlan();
 
+        $this->assertEmpty($plan->getSlug());
         $this->assertEmpty($plan->getName());
         $this->assertEquals(0, $plan->getTimeInMinutes());
         $this->assertEquals(0.0, $plan->getAdditionalMinuteRate());
