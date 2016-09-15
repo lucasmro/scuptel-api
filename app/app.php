@@ -42,6 +42,13 @@ $app['plan.controller'] = function($app) {
     );
 };
 
+$app['price.controller'] = function($app) {
+    return new \Sprinklr\ScupTel\Application\Controller\PriceController(
+        $app['serializer'],
+        $app['price.repository']
+    );
+};
+
 $app['serializer'] = function ($app) {
     $serializerBuilder = JMS\Serializer\SerializerBuilder::create();
     $serializerBuilder->setCacheDir($app['serializer.cache.dir']);
@@ -64,6 +71,8 @@ $app->get('/', function(Request $request) use ($app) {
 $app->get('/plans', 'plan.controller:index');
 
 $app->get('/area-codes', 'area.code.controller:index');
+
+$app->get('/prices', 'price.controller:index');
 
 // Error Handler
 ErrorHandler::register();

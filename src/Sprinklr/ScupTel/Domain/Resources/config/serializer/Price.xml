@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sprinklr\ScupTel\Domain\Entity\Price" exclusion-policy="all">
+    	<property name="fromAreaCode" type="Sprinklr\ScupTel\Domain\Entity\AreaCode" expose="true" serialized-name="origin" />
+    	<property name="toAreaCode" type="Sprinklr\ScupTel\Domain\Entity\AreaCode" expose="true" serialized-name="destiny" />
+    	<property name="valuePerMinute" type="double" expose="true" serialized-name="price" />
+    </class>
+</serializer>
