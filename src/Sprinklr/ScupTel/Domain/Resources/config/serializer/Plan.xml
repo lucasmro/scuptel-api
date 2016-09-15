@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sprinklr\ScupTel\Domain\Entity\Plan" exclusion-policy="all">
+    	<property name="name" type="string" expose="true" serialized-name="name" />
+    	<property name="timeInMinutes" type="integer" expose="true" serialized-name="timeInMinutes" />
+    	<property name="additionalMinuteRate" type="double" expose="true" serialized-name="additionalMinuteRate" />
+    </class>
+</serializer>

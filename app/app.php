@@ -12,6 +12,20 @@ $app = new Silex\Application();
 
 // Config
 $app['debug'] = true;
+$app['serializer.cache.dir'] =__DIR__.'/../app/cache/serializer';
+$app['serializer.debug'] = false;
+
+// Services
+$app['serializer'] = function ($app) {
+    $serializerBuilder = JMS\Serializer\SerializerBuilder::create();
+    $serializerBuilder->setCacheDir($app['serializer.cache.dir']);
+    $serializerBuilder->setDebug($app['serializer.debug']);
+    $serializerBuilder->addMetadataDir(
+        __DIR__ . '/../src/Sprinklr/ScupTel/Domain/Resources/config/serializer', 'Sprinklr\ScupTel\Domain\Entity'
+    );
+
+    return $serializerBuilder->build();
+};
 
 // Providers
 $app->register(new \Silex\Provider\ServiceControllerServiceProvider());
