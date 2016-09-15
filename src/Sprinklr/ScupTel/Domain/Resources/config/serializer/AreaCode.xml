@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sprinklr\ScupTel\Domain\Entity\AreaCode" exclusion-policy="all">
+		<property name="code" type="integer" expose="true" serialized-name="code" />
+		<property name="name" type="string" expose="true" serialized-name="name" />
+    </class>
+</serializer>

@@ -16,8 +16,19 @@ $app['serializer.cache.dir'] =__DIR__.'/../app/cache/serializer';
 $app['serializer.debug'] = false;
 
 // Services
+$app['area.code.repository'] = function($app) {
+    return new \Sprinklr\ScupTel\Infrastructure\Repository\AreaCodeRepository();
+};
+
 $app['plan.repository'] = function($app) {
     return new \Sprinklr\ScupTel\Infrastructure\Repository\PlanRepository();
+};
+
+$app['area.code.controller'] = function($app) {
+    return new \Sprinklr\ScupTel\Application\Controller\AreaCodeController(
+        $app['serializer'],
+        $app['area.code.repository']
+    );
 };
 
 $app['plan.controller'] = function($app) {
@@ -47,6 +58,8 @@ $app->get('/', function(Request $request) use ($app) {
 });
 
 $app->get('/plans', 'plan.controller:index');
+
+$app->get('/area-codes', 'area.code.controller:index');
 
 // Error Handler
 ErrorHandler::register();
