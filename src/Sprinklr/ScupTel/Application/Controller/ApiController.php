@@ -8,8 +8,10 @@ use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ApiController
+abstract class ApiController
 {
+    const CONTENT_TYPE_JSON = 'json';
+
     protected $serializer;
 
     public function __construct(SerializerInterface $serializer)
@@ -19,11 +21,12 @@ class ApiController
 
     protected function buildResponse(Request $request, $data, $code = Response::HTTP_OK, $groups = array())
     {
-        $format = $this->getFormat($request);
-        $headers = array();
+        $headers = array(
+            'Content-Type' => self::CONTENT_TYPE_JSON
+        );
 
         return new Response(
-            $this->serialize($data, $format, $groups),
+            $this->serialize($data),
             $code,
             $headers
         );
@@ -34,15 +37,6 @@ class ApiController
         $serializationContext = $this->getSerializationContext($groups);
 
         return $this->serializer->serialize($data, $format, $serializationContext);
-    }
-
-    private function getFormat(Request $request)
-    {
-        if ('json' === $request->getContentType() || 'xml' === $request->getContentType()) {
-            return $request->getContentType();
-        }
-
-        return 'json';
     }
 
     private function getSerializationContext($groups = array())
