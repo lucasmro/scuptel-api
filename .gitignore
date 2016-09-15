@@ -1,6 +1,7 @@
 /vendor/
 /build/
 /app/cache/
+/app/logs/
 .idea
 .DS_Store
 
