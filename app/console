@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+set_time_limit(0);
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+$input = new Symfony\Component\Console\Input\ArgvInput();
+
+require_once dirname(__DIR__) ."/app/app.php";
+
+$console = $app["console"];
+$console->add(new \Sprinklr\ScupTel\Infrastructure\Command\SetupProjectCommand());
+$console->run();
