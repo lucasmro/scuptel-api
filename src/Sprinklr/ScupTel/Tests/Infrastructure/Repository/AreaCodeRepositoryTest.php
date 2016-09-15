@@ -3,7 +3,6 @@
 namespace Sprinklr\ScupTel\Tests\Infrastructure\Repository;
 
 use Sprinklr\ScupTel\Domain\DataFixture\AreaCodeData;
-use Sprinklr\ScupTel\Domain\DataFixture\PlanData;
 
 class AreaCodeRepositoryTest extends \PHPUnit_Framework_TestCase
 {

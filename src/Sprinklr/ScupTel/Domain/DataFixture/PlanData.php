@@ -8,16 +8,16 @@ class PlanData
 {
     public static function createPlanFaleMais30()
     {
-        return  new Plan('Fale Mais 30', 30, 0.1);
+        return  new Plan('FaleMais 30', 30, 0.1);
     }
 
     public static function createPlanFaleMais60()
     {
-        return  new Plan('Fale Mais 60', 60, 0.1);
+        return  new Plan('FaleMais 60', 60, 0.1);
     }
 
     public static function createPlanFaleMais120()
     {
-        return  new Plan('Fale Mais 120', 120, 0.1);
+        return  new Plan('FaleMais 120', 120, 0.1);
     }
 }
