@@ -14,6 +14,9 @@ $app = new Silex\Application();
 $app['debug'] = true;
 $app['serializer.cache.dir'] =__DIR__.'/../app/cache/serializer';
 $app['serializer.debug'] = false;
+$app['logger.level'] = Monolog\Logger::INFO;
+$app['logger.directory'] = __DIR__.'/../app/logs';
+$app['logger.logfile'] = $app['logger.directory'] . '/scuptel.log';
 
 // Services
 $app['area.code.repository'] = function($app) {
@@ -58,6 +61,23 @@ $app['serializer'] = function ($app) {
     );
 
     return $serializerBuilder->build();
+};
+
+$app['scuptel.logger'] = function ($app) {
+    $logger = new Monolog\Logger('scuptel.logger');
+    $logger->pushHandler($app['logger.handler']);
+
+    return $logger;
+};
+
+$app['logger.handler'] = function ($app) {
+    $output = "[%datetime%]\t[%level_name%]\t%message%\t%context%\t%extra%\n";
+
+    $handler = new Monolog\Handler\RotatingFileHandler($app['logger.logfile'], $app['logger.level']);
+    $handler->pushProcessor(new Monolog\Processor\WebProcessor());
+    $handler->setFormatter(new Monolog\Formatter\LineFormatter($output));
+
+    return $handler;
 };
 
 // Providers
