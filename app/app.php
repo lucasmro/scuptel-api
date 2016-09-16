@@ -55,6 +55,18 @@ $app['price.controller'] = function($app) {
     );
 };
 
+$app['calculator.factory.service'] = function($app) {
+    return new \Sprinklr\ScupTel\Domain\Service\CalculatorFactory();
+};
+
+$app['calculator.factory.service'] = function($app) {
+    return new \Sprinklr\ScupTel\Domain\Service\PriceSimulator(
+        $app['calculator.factory.service'],
+        $app['price.repository'],
+        $app['plan.repository']
+    );
+};
+
 $app['serializer'] = function ($app) {
     $serializerBuilder = JMS\Serializer\SerializerBuilder::create();
     $serializerBuilder->setCacheDir($app['serializer.cache.dir']);
