@@ -83,6 +83,7 @@ abstract class ApiController
     private function getSerializationContext($groups = array())
     {
         $serializationContext = SerializationContext::create();
+        $serializationContext->setSerializeNull(true);
 
         if (!empty($groups)) {
             $serializationContext->setGroups($groups);
