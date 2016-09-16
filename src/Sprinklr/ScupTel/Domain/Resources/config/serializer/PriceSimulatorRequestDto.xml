@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sprinklr\ScupTel\Domain\Dto\PriceSimulatorRequestDto" exclusion-policy="all">
+        <property name="fromAreaCode" type="integer" expose="true" serialized-name="fromAreaCode" />
+        <property name="toAreaCode" type="integer" expose="true" serialized-name="toAreaCode" />
+        <property name="timeInMinutes" type="integer" expose="true" serialized-name="timeInMinutes" />
+    </class>
+</serializer>
