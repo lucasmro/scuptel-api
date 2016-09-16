@@ -3,6 +3,7 @@
 namespace Sprinklr\ScupTel\Application\Controller;
 
 
+use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,6 +38,23 @@ abstract class ApiController
         $serializationContext = $this->getSerializationContext($groups);
 
         return $this->serializer->serialize($data, $format, $serializationContext);
+    }
+
+    protected function getObjectFromRequest(Request $request, $className, $groups = array())
+    {
+        $deserializationContext = DeserializationContext::create();
+
+        if (!empty($groups)) {
+            $deserializationContext->setGroups($groups);
+        }
+
+        return $this->serializer->deserialize(
+            $request->getContent(),
+            $className,
+            $request->getContentType(),
+            $deserializationContext
+        );
+
     }
 
     private function getSerializationContext($groups = array())
