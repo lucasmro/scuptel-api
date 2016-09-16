@@ -5,10 +5,17 @@ require_once __DIR__.'/../vendor/autoload.php';
 use Symfony\Component\Debug\ExceptionHandler;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\HttpFoundation\Request;
 
 $app = new Silex\Application();
+
+// Handling CORS
+$app->after(function (Request $request, Response $response) {
+    $response->headers->set('Access-Control-Allow-Origin', '*');
+    $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
 
 // Config
 $app['debug'] = true;
@@ -136,6 +143,11 @@ $app->get('/area-codes', 'area.code.controller:index');
 $app->get('/prices', 'price.controller:index');
 
 $app->post('/price-simulator', 'price.simulator.controller:simulate');
+
+$app->get(
+    '/price-simulator/origin/{origin}/destiny/{destiny}/time/{time}',
+    'price.simulator.controller:simulateByOriginAndDestinyAndTime'
+);
 
 // Error Handler
 ErrorHandler::register();

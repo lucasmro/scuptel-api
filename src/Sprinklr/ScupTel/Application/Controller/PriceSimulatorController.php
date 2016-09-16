@@ -4,6 +4,7 @@ namespace Sprinklr\ScupTel\Application\Controller;
 
 use JMS\Serializer\SerializerInterface;
 use Psr\Log\LoggerInterface;
+use Sprinklr\ScupTel\Domain\Dto\PriceSimulatorRequestDto;
 use Sprinklr\ScupTel\Domain\Service\PriceSimulatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +34,23 @@ class PriceSimulatorController extends ApiController
         $this->logger->addInfo('PriceSimulatorController :: simulate()');
 
         $simulationRequestDto = $this->getObjectFromRequest($request, self::PRICE_SIMULATOR_REQUEST_DTO_NAMESPACE);
+
+        $this->validate($simulationRequestDto);
+
+        $simulations = $this->priceSimulator->simulateAll(
+            $simulationRequestDto->getFromAreaCode(),
+            $simulationRequestDto->getToAreaCode(),
+            $simulationRequestDto->getTimeInMinutes()
+        );
+
+        return $this->buildResponse($request, $simulations, Response::HTTP_OK);
+    }
+
+    public function simulateByOriginAndDestinyAndTime(Request $request, $origin, $destiny, $time)
+    {
+        $this->logger->addInfo('PriceSimulatorController :: simulate()');
+
+        $simulationRequestDto = new PriceSimulatorRequestDto($origin, $destiny, $time);
 
         $this->validate($simulationRequestDto);
 
