@@ -59,7 +59,7 @@ $app['calculator.factory.service'] = function($app) {
     return new \Sprinklr\ScupTel\Domain\Service\CalculatorFactory();
 };
 
-$app['calculator.factory.service'] = function($app) {
+$app['price.simulator.service'] = function($app) {
     return new \Sprinklr\ScupTel\Domain\Service\PriceSimulator(
         $app['calculator.factory.service'],
         $app['price.repository'],
@@ -97,6 +97,8 @@ $app['logger.handler'] = function ($app) {
 
 // Providers
 $app->register(new \Silex\Provider\ServiceControllerServiceProvider());
+
+$app->register(new Silex\Provider\ValidatorServiceProvider());
 
 $app->register(new Cocur\Slugify\Bridge\Silex2\SlugifyServiceProvider());
 
