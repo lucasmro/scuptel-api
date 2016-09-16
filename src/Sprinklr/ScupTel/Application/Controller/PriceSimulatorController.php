@@ -7,6 +7,7 @@ use Psr\Log\LoggerInterface;
 use Sprinklr\ScupTel\Domain\Service\PriceSimulatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PriceSimulatorController extends ApiController
 {
@@ -18,9 +19,10 @@ class PriceSimulatorController extends ApiController
     public function __construct(
         LoggerInterface $logger,
         SerializerInterface $serializer,
+        ValidatorInterface $validator,
         PriceSimulatorInterface $priceSimulator
     ) {
-        parent::__construct($serializer);
+        parent::__construct($serializer, $validator);
 
         $this->logger = $logger;
         $this->priceSimulator = $priceSimulator;
@@ -31,6 +33,8 @@ class PriceSimulatorController extends ApiController
         $this->logger->addInfo('PriceSimulatorController :: simulate()');
 
         $simulationRequestDto = $this->getObjectFromRequest($request, self::PRICE_SIMULATOR_REQUEST_DTO_NAMESPACE);
+
+        $this->validate($simulationRequestDto);
 
         $simulations = $this->priceSimulator->simulateAll(
             $simulationRequestDto->getFromAreaCode(),

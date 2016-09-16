@@ -8,6 +8,7 @@ use Sprinklr\ScupTel\Domain\Dto\CollectionDto;
 use Sprinklr\ScupTel\Domain\Repository\AreaCodeRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AreaCodeController extends ApiController
 {
@@ -17,9 +18,10 @@ class AreaCodeController extends ApiController
     public function __construct(
         LoggerInterface $logger,
         SerializerInterface $serializer,
+        ValidatorInterface $validator,
         AreaCodeRepositoryInterface $repository
     ) {
-        parent::__construct($serializer);
+        parent::__construct($serializer, $validator);
 
         $this->logger = $logger;
         $this->repository = $repository;

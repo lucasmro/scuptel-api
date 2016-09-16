@@ -35,6 +35,7 @@ $app['area.code.controller'] = function($app) {
     return new \Sprinklr\ScupTel\Application\Controller\AreaCodeController(
         $app['scuptel.logger'],
         $app['serializer'],
+        $app['validator'],
         $app['area.code.repository']
     );
 };
@@ -43,6 +44,7 @@ $app['plan.controller'] = function($app) {
     return new \Sprinklr\ScupTel\Application\Controller\PlanController(
         $app['scuptel.logger'],
         $app['serializer'],
+        $app['validator'],
         $app['plan.repository']
     );
 };
@@ -51,6 +53,7 @@ $app['price.controller'] = function($app) {
     return new \Sprinklr\ScupTel\Application\Controller\PriceController(
         $app['scuptel.logger'],
         $app['serializer'],
+        $app['validator'],
         $app['price.repository']
     );
 };
@@ -59,6 +62,7 @@ $app['price.simulator.controller'] = function($app) {
     return new \Sprinklr\ScupTel\Application\Controller\PriceSimulatorController(
         $app['scuptel.logger'],
         $app['serializer'],
+        $app['validator'],
         $app['price.simulator.service']
     );
 };

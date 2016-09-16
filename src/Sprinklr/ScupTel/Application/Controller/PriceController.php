@@ -8,6 +8,7 @@ use Sprinklr\ScupTel\Domain\Dto\CollectionDto;
 use Sprinklr\ScupTel\Domain\Repository\PriceRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PriceController extends ApiController
 {
@@ -17,9 +18,10 @@ class PriceController extends ApiController
     public function __construct(
         LoggerInterface $logger,
         SerializerInterface $serializer,
+        ValidatorInterface $validator,
         PriceRepositoryInterface $repository
     ) {
-        parent::__construct($serializer);
+        parent::__construct($serializer, $validator);
 
         $this->logger = $logger;
         $this->repository = $repository;

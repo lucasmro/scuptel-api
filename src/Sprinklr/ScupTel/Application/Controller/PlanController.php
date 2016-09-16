@@ -8,6 +8,7 @@ use Sprinklr\ScupTel\Domain\Dto\CollectionDto;
 use Sprinklr\ScupTel\Domain\Repository\PlanRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PlanController extends ApiController
 {
@@ -17,9 +18,10 @@ class PlanController extends ApiController
     public function __construct(
         LoggerInterface $logger,
         SerializerInterface $serializer,
+        ValidatorInterface $validator,
         PlanRepositoryInterface $repository
     ) {
-        parent::__construct($serializer);
+        parent::__construct($serializer, $validator);
 
         $this->logger = $logger;
         $this->repository = $repository;

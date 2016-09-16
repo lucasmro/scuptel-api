@@ -8,16 +8,22 @@ use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 abstract class ApiController
 {
     const CONTENT_TYPE_JSON = 'json';
 
     protected $serializer;
+    protected $validator;
 
-    public function __construct(SerializerInterface $serializer)
-    {
+    public function __construct(
+        SerializerInterface $serializer,
+        ValidatorInterface $validator
+    ) {
         $this->serializer = $serializer;
+        $this->validator = $validator;
     }
 
     protected function buildResponse(Request $request, $data, $code = Response::HTTP_OK, $groups = array())
@@ -55,6 +61,23 @@ abstract class ApiController
             $deserializationContext
         );
 
+    }
+
+    protected function validate($object)
+    {
+        $validation_errors = $this->validator->validate($object);
+
+        if (count($validation_errors) == 0) {
+            return;
+        }
+
+        $errors = array();
+
+        foreach ($validation_errors as $error) {
+            $errors[$error->getPropertyPath()] = $error->getMessage();
+        }
+
+        throw new BadRequestHttpException(json_encode($errors));
     }
 
     private function getSerializationContext($groups = array())
