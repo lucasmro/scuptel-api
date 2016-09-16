@@ -55,6 +55,14 @@ $app['price.controller'] = function($app) {
     );
 };
 
+$app['price.simulator.controller'] = function($app) {
+    return new \Sprinklr\ScupTel\Application\Controller\PriceSimulatorController(
+        $app['scuptel.logger'],
+        $app['serializer'],
+        $app['price.simulator.service']
+    );
+};
+
 $app['calculator.factory.service'] = function($app) {
     return new \Sprinklr\ScupTel\Domain\Service\CalculatorFactory();
 };
@@ -73,6 +81,9 @@ $app['serializer'] = function ($app) {
     $serializerBuilder->setDebug($app['serializer.debug']);
     $serializerBuilder->addMetadataDir(
         __DIR__ . '/../src/Sprinklr/ScupTel/Domain/Resources/config/serializer', 'Sprinklr\ScupTel\Domain\Entity'
+    );
+    $serializerBuilder->addMetadataDir(
+        __DIR__ . '/../src/Sprinklr/ScupTel/Domain/Resources/config/serializer', 'Sprinklr\ScupTel\Domain\Dto'
     );
 
     return $serializerBuilder->build();
@@ -119,6 +130,8 @@ $app->get('/plans', 'plan.controller:index');
 $app->get('/area-codes', 'area.code.controller:index');
 
 $app->get('/prices', 'price.controller:index');
+
+$app->post('/price-simulator', 'price.simulator.controller:simulate');
 
 // Error Handler
 ErrorHandler::register();
