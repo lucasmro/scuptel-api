@@ -1,4 +1,4 @@
-# ScupTel - Fale Mais
+# ScupTel - Fale Mais (Backend)
 
 Sistema web para simular o custo da ligação telefônica dos clientes da empresa ScupTel.
 
@@ -7,12 +7,23 @@ Sistema web para simular o custo da ligação telefônica dos clientes da empres
 Os clientes da ScupTel deverão informar o tempo de duração da ligação, o DDD de origem e de destino da ligação.
 O resultado será um comparativo entre os planos do produto "Fale Mais".
 
-## Requisitos
+## Documentação
 
-- Apache 2
+A documentação do desafio pode ser encontrada em [ShowMeTheCode-Backend.pdf](docs/ShowMeTheCode-Backend.pdf).
+
+## Endpoints (Produção)
+
+**Backend:** http://45.55.67.91
+
+**Frontend:** http://104.131.182.79
+
+## Tecnologias e Requisitos
+
 - PHP 5.5.9
+- Silex 2
 - Composer
 - PHPUnit
+- Apache 2
 
 ## Instalação
 
